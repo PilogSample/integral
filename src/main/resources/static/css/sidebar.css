@@ -147,8 +147,7 @@ and open the template in the editor.
 
 
 .sidebar-content {
-    /*max-height: calc(100% - 30px);*/
-    height: calc(100vh - 50px - 40px);
+    height: calc(100vh - 50px);
     overflow-y: hidden;
     position: fixed;
     z-index: 1029; 

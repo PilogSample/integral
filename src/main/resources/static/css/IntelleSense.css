@@ -20901,8 +20901,7 @@ table .dragtable-col-placeholder:first {
 }
 
 .dxpPageWrapper {
-	margin-top: 60px;
-	height: calc(100vh - 50px - 40px);
+	height: calc(100vh - 80px);
 }
 
 .dxpToolBarCustomize .modal-header {

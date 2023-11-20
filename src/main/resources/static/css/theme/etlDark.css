@@ -126,10 +126,10 @@
 .etl-page-body{
     height: 100%;
     width: 100%;
-    display: flex;
 }
 .etl-page-body .visionJqxWidgetsClass{
     width: 100%;
+    height: 100%;
 }
 .dark-mode .etl-page-body .jqx-widget-content{
     background: #252830;
@@ -2217,9 +2217,9 @@ input.importClass {
     color:#000;
 }
 
-.visionEtlTreeFolders img{
+/* .visionEtlTreeFolders img{
     margin-right: 4px;
-}
+} */
 .etl-page-body .jqx-disableselect .jqx-tabs-close-button{
     visibility: hidden;
 }

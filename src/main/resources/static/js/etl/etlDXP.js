@@ -2687,7 +2687,7 @@ function switchETLDesignTabs(liId, divId) {
 }
 
 function showSavedJobs(parFolderId, parFolderName, folderId, folderName, jobType) {
-
+    // need to add divs 20-11-2023
 	if (folderId == null || folderId == 'undefined' || folderId == 'null' || folderId == '') {
 		folderId = "C8DE75F32D56288CE0554B610B40A4A3";
 		folderName = "Saved Jobs";
@@ -2733,14 +2733,14 @@ function showSavedJobs(parFolderId, parFolderName, folderId, folderName, jobType
 						jobsListStr += "<div class='etlSavedJobFolder etlSavedJobsList visionEtlTreeFolders'  id='" + jobId + "'  parentfolderId='" + parentFolderId + "'  parentfoldername='" + parentFolderName + "' "
 							+ " folderid='" + folderId + "' foldername='" + folderName + "' "
 							+ " ondblclick=\"showSavedJobs('" + parentFolderId + "','" + parentFolderName + "','" + folderId + "','" + folderName + "','ETL')\"  >"
-							+ "<img class='etlSavedJobsListIcon' src='images/etl/etl_folder.png' /><span>" + folderName + "<br><small>" + formattedDate + "</small></span>"
+							+ "<div class='etlImageContainerIcon'><img class='etlSavedJobsListIcon' src='images/etl/etl_folder.png' /></div><div class='etlContentText'><span>" + folderName + "</span><span>" + formattedDate + "</span></div>" //changed divs here 20-11-2023
 							+ "<img class='etlexplorerRightClickOptions etlSavejobFolderOptions'  src='images/etl/threedots-ver.png' style='display: none;'>"
 							+ "</div>";
 					} else {
 						jobsListStr += "<div class='etlSavedJob etlSavedJobsList visionEtlTreeFolders' id='" + jobId + "' jobname='" + jobDescr + "' "
 							+ " parentfolderId='" + parentFolderId + "'  parentfoldername='" + parentFolderName + "' "
 							+ " ondblclick=\"openSavedJob(event,'" + jobId + "','" + jobDescr + "','" + folderName + "','" + folderId + "')\"  >"
-							+ "<img class='etlSavedJobsListIcon' src='images/etl/etl_job.png' /><span>" + jobDescr + "<br><small>" + formattedDate + "</small></span>"
+							+ "<div class='etlImageContainerIcon'><img class='etlSavedJobsListIcon' src='images/etl/etl_job.png' /></div><div class='etlContentText'><span>" + jobDescr + "</span><span>" + formattedDate + "</span></div>" //changed divs here 20-11-2023
 							+ "<img class='etlexplorerRightClickOptions etlSavejobOptions'  src='images/etl/threedots-ver.png' style='display: none;'>"
 							+ "</div>";
 					}

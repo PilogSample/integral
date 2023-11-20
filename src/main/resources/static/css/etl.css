@@ -124,11 +124,11 @@
 .etl-page-body {
     height: 100%;
     width: 100%;
-    display: flex;
 }
 
 .etl-page-body .visionJqxWidgetsClass {
     width: 100%;
+    height: 100%;
 }
 
 .etl-page-body .jqx-widget-content {
@@ -2342,9 +2342,9 @@ input.importClass {
     color: #000;
 }
 
-.visionEtlTreeFolders img {
+/* .visionEtlTreeFolders img {
     margin-right: 4px;
-}
+} */
 
 .etl-page-body .jqx-disableselect .jqx-tabs-close-button {
     visibility: hidden;
@@ -2569,31 +2569,34 @@ input.importClass {
 /*    height: 330px;
     overflow: scroll;*/
     overflow-y: scroll;
-    height: calc(70vh - 125px);
+    height: calc(70vh - 118px);
 
 }
 
 
 
 .etlConnectionItem {
-    padding: 5px;
+    padding: 7px;
     margin: 5px;
     cursor: pointer;
     border: 1px solid #ddd;
-    /* border-radius: 5px; */
-    background: #eee;
+    background: #fff;
     display: flex;
+    border-radius: 6px;
+    gap: 10px;
+    align-items:center;
+    position: relative;
 }
 
 .etlConnectionItem span {
-    margin-left: 15px;
+    /* margin-left: 15px; */
     font-size: 14px;
     display: inline-block;
     width: 100%;
     white-space: nowrap;
     overflow: hidden !important;
     text-overflow: ellipsis;
-    margin-top: 8px;
+    /* margin-top: 8px; */
 }
 
 .etlexplorerImg {
@@ -2717,21 +2720,17 @@ input.importClass {
 }
 
 .etlexplorerSubImg {
-    width: 20px;
-    height: 20px;
-    position: relative;
-    top: 15px;
-    left: -10px;
+    width: 15px;
+    height: 15px;
+    top: 24px;
+    left: 31px;
     border-radius: 50%;
-    border: 1px solid #ddd;
+    position: absolute;
 }
 
 .etlexplorerRightClickOptions {
-    width: 20px;
-    height: 20px;
-    position: relative;
-    top: 5px;
-    left: 7px;
+    width: 15px;
+    height: 15px;
     display: none;
 }
 
@@ -3249,36 +3248,39 @@ table.jobScheduleTable tbody th {
     margin: 5px;
     cursor: pointer;
     border: 1px solid #ddd;
-    /* border-radius: 5px; */
-    background: #f7f7f7;
+    background: #fff;
     display: flex;
+    align-items:center;
+    gap:10px;
 }
 
 .etlSavedJobsListIcon{
     width: 30px;
-    left: 5px;
-    position: relative;
+    /* left: 5px;
+    position: relative; */
 }
 
-.etlSavedJobsList span{
-    margin-left: 15px;
+.etlSavedJobsList span:first-child{
+    /* margin-left: 15px; */
     font-size: 14px;
     display: inline-block;
     width: 100%;
     white-space: nowrap;
     overflow: hidden !important;
     text-overflow: ellipsis;
-    margin-top: 8px;
+    /* margin-top: 8px; */
 
 }
 
 
 
+
+
 #etlSavedJobsBreadCrumb span{
     position: relative;
-    margin: 10px;
-    font-size: 14px;
-    display: inline-flex;
+    margin: 5px 6px;
+    font-size: 13px;
+    display: inline-block;
 }
 
 #etlSavedJobsBreadCrumb span:hover{
@@ -3310,9 +3312,9 @@ table.jobScheduleTable tbody th {
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
 }
-.etlSavejobOptions, .etlSavejobFolderOptions{
+/* .etlSavejobOptions, .etlSavejobFolderOptions{
     float: right;
-}
+} */
 
 #availableJobsId{
     height: 79%;

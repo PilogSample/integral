@@ -20,9 +20,6 @@ and open the template in the editor.
 	width: 100%;
 }
 
-.dxpPageWrapper {
-	height: calc(100vh - 50px - 40px);
-}
 /* Modal PopUp Animation Css Starts Here */ 
 .opacity-animate3 {
 	animation: opt-animation3 1s;
