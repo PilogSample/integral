@@ -1,5 +1,9 @@
 /***********ETL CSS START*********/
 
+#mainSplitter {
+    height: 100% !important;
+  }
+
 /*FLOWCHART WORKSPACE CSS START*/
 .flowchart-example-container {
     /*    width: 800px;*/
@@ -27,6 +31,7 @@
 
 .etl-page-body .jqx-widget-header {
     background: #fff;
+
 }
 
 .flowChartTabs {
@@ -3064,6 +3069,7 @@ table.jobScheduleTable tbody th {
 
 .etl-page-body .jqx-tabs-content{
     margin-top: 13px !important;
+    height: 451px !important;
 }
 
 .etl-page-body .jqx-tabs-title-selected-top{
@@ -3461,8 +3467,8 @@ table.jobScheduleTable tbody th {
     position: absolute;
     top: 0px;
     left: 0px;
-    width: 100%;
-    height: 100%;
+    /* width: 100%;
+    height: 100%; */
 }
 
 .etl-page-body .flowchart-operators-layer, .etl-page-body .flowchart-temporary-link-layer {
@@ -3695,8 +3701,8 @@ table.jobScheduleTable tbody th {
 
 
 .etlTablesExplorerInner {
-    height: 400px;
-    overflow: scroll;
+    height: 452px;
+    overflow-y: scroll;
 }
 
 .etlTablesExplorerSearchInput{
