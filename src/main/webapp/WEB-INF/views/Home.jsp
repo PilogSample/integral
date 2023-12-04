@@ -50,12 +50,6 @@
 	margin-bottom: 15px;
 }
 
-body {
-	margin: 0 auto;
-	background-position: center;
-	background-size: contain;
-}
-
 .menu {
 	position: sticky;
 	top: 0;
@@ -96,454 +90,470 @@ body {
 .body_sec {
 	margin-left: 20px;
 }
+ .se-pre-con {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background: url(images/Loader.gif) center no-repeat #f8f9f9;
+        background-size: 90px 82px;
+}
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+        color: #000;
+}
+
 </style>
 </head>
 <body>
 
-	<c:choose>
-		<c:when test="${not empty sessionScope.ssUsername}">
-			<%@include file="loginHeader.jsp"%>
-		</c:when>
-		<c:otherwise>
-			<%@include file="header.jsp"%>
-		</c:otherwise>
-	</c:choose>
-	<div class="dxpPageWrapper dxpTheme d-flex align-items-stretch toggled">
-		<c:choose>
-			<c:when test="${not empty sessionScope.ssUsername}">
-				<%@include file="sideMenu.jsp"%>
-			</c:when>
-			<c:otherwise>
-			</c:otherwise>
-		</c:choose>
+	<div class="integral-page-container" id="layout-wrapper">
+        <c:choose>
+                <c:when test="${not empty sessionScope.ssUsername}">
+                    <%@include file="loginHeader.jsp"%>
+                </c:when>
+                <c:otherwise>
+                    <%@include file="header.jsp"%>
+                </c:otherwise>
+        </c:choose>
+        <div class="dxpPageWrapper dxpTheme d-flex align-items-stretch toggled">
+        		<c:choose>
+        			<c:when test="${not empty sessionScope.ssUsername}">
+        				<%@include file="sideMenu.jsp"%>
+        			</c:when>
+        			<c:otherwise>
+        			</c:otherwise>
+        		</c:choose>
+        		<div class="dxpPageContent">
+        			<div class="page-body" id="pageBody">
+        				<div class="page-body-content" id="pageBodyContent"></div>
+        				<div id="Loader" style="display: none;">
+        					<div class="loadermain">
+        						<div class="loader-ring">
+        							<img src="images/Loader.gif" class="themeModeDark loaderWait">
+        						</div>
+        					</div>
+        				</div>
+        				<div class="hintImage" id="hintImageID" style='display: none;'></div>
+        			</div>
+        			<div class='scrollToTop' onclick='scrollToTop();'>
+        				<img src="images/top_arrow_icon.svg" width='20px' id='top_arrow'
+        					style='display: none;' />
+        			</div>
+        			<div class='scrollToBottom' onclick=' scrollToBottom();'>
+        				<img src="images/bottom_arrow_icon.svg" class='scrollToBottom'
+        					width='20px' id='bottom_arrow' style='display: none;' />
+        			</div>
 
-		<div class="dxpPageContent">
-			<div class="page-body" id="pageBody">
-				<div class="page-body-content" id="pageBodyContent"></div>
-				<div id="Loader" style="display: none;">
-					<div class="loadermain">
-						<div class="loader-ring">
-							<img src="images/Loader.gif" class="themeModeDark loaderWait">
-						</div>
-					</div>
-				</div>
-				<div class="hintImage" id="hintImageID" style='display: none;'></div>
-			</div>
-			<div class='scrollToTop' onclick='scrollToTop();'>
-				<img src="images/top_arrow_icon.svg" width='20px' id='top_arrow'
-					style='display: none;' />
-			</div>
-			<div class='scrollToBottom' onclick=' scrollToBottom();'>
-				<img src="images/bottom_arrow_icon.svg" class='scrollToBottom'
-					width='20px' id='bottom_arrow' style='display: none;' />
-			</div>
+        			<div id="settingPannel" class="settingPannel">
+        				<div class="pannelTitle">
+        					<span class='settingsIcon' id='settingsIcon'></span> <span
+        						class='spanTitle' id="clickedTitle">Settings</span> <span
+        						class='spanCloseIcon' onclick="closesettingPannel()">×</span>
+        				</div>
+        				<div class="settingPannelInnerWrapper">
+        					<div class='listofSettingDiv' id='settingContentDiv'
+        						style='display: none;'>
+        						<ul>
+        							<li class="fontChangeIcon dropdown"><a
+        								class="dropdown-toggle" href="#" data-toggle="dropdown"> <span
+        									class='listImage'><img src="images/font.png"
+        										style='width: 20px;' title="Font Type"
+        										class="fontChangeButton themeModeDark" /> </span> <span
+        									class='mobileTitle'>Font Type</span>
+        							</a>
+        								<ul class="dropdown-menu">
+        									<li><a class='dropdown-toggle' data-toggle="dropdown"
+        										href="#"> Menu</a>
+        										<ul class="submenu dropdown-menu">
+        											<li><a tabindex="-1" href="#" id="upperCaseMenu"
+        												onclick="showViewFont('Menu','UpperCase')">UpperCase</a></li>
+        											<li><a tabindex="-1" href="#" id="LowerCaseMenu"
+        												onclick="showViewFont('Menu','LowerCase')">LowerCase</a></li>
+        											<li><a tabindex="-1" href="#" id="capitaliseFontMenu"
+        												onclick="showViewFont('Menu','Refresh')">Refresh</a></li>
 
-			<div id="settingPannel" class="settingPannel">
-				<div class="pannelTitle">
-					<span class='settingsIcon' id='settingsIcon'></span> <span
-						class='spanTitle' id="clickedTitle">Settings</span> <span
-						class='spanCloseIcon' onclick="closesettingPannel()">×</span>
-				</div>
-				<div class="settingPannelInnerWrapper">
-					<div class='listofSettingDiv' id='settingContentDiv'
-						style='display: none;'>
-						<ul>
-							<li class="fontChangeIcon dropdown"><a
-								class="dropdown-toggle" href="#" data-toggle="dropdown"> <span
-									class='listImage'><img src="images/font.png"
-										style='width: 20px;' title="Font Type"
-										class="fontChangeButton themeModeDark" /> </span> <span
-									class='mobileTitle'>Font Type</span>
-							</a>
-								<ul class="dropdown-menu">
-									<li><a class='dropdown-toggle' data-toggle="dropdown"
-										href="#"> Menu</a>
-										<ul class="submenu dropdown-menu">
-											<li><a tabindex="-1" href="#" id="upperCaseMenu"
-												onclick="showViewFont('Menu','UpperCase')">UpperCase</a></li>
-											<li><a tabindex="-1" href="#" id="LowerCaseMenu"
-												onclick="showViewFont('Menu','LowerCase')">LowerCase</a></li>
-											<li><a tabindex="-1" href="#" id="capitaliseFontMenu"
-												onclick="showViewFont('Menu','Refresh')">Refresh</a></li>
+        										</ul></li>
+        									<li><a class='dropdown-toggle' data-toggle="dropdown"
+        										href="#">Description </a>
+        										<ul class="submenu dropdown-menu">
+        											<li><a tabindex="-1" href="#" id="upperCaseDes"
+        												onclick="showViewFont('Description','UpperCase')">UpperCase</a></li>
+        											<li><a tabindex="-1" href="#" id="LowerCaseDes"
+        												onclick="showViewFont('Description','LowerCase')">LowerCase</a></li>
+        											<li><a tabindex="-1" href="#" id="capitaliseFontDes"
+        												onclick="showViewFont('Description','Refresh')">Refresh</a></li>
 
-										</ul></li>
-									<li><a class='dropdown-toggle' data-toggle="dropdown"
-										href="#">Description </a>
-										<ul class="submenu dropdown-menu">
-											<li><a tabindex="-1" href="#" id="upperCaseDes"
-												onclick="showViewFont('Description','UpperCase')">UpperCase</a></li>
-											<li><a tabindex="-1" href="#" id="LowerCaseDes"
-												onclick="showViewFont('Description','LowerCase')">LowerCase</a></li>
-											<li><a tabindex="-1" href="#" id="capitaliseFontDes"
-												onclick="showViewFont('Description','Refresh')">Refresh</a></li>
+        										</ul></li>
+        									<li><a class='dropdown-toggle' data-toggle="dropdown"
+        										href="#">Content</a>
+        										<ul class="submenu dropdown-menu">
+        											<li><a tabindex="-1" href="#" id="upperCaseContent"
+        												onclick="showViewFont('Content','UpperCase')">UpperCase</a></li>
+        											<li><a tabindex="-1" href="#" id="LowerCaseContent"
+        												onclick="showViewFont('Content','LowerCase')">LowerCase</a></li>
+        											<li><a tabindex="-1" href="#" id="capitaliseFontContent"
+        												onclick="showViewFont('Content','Refresh')">Refresh</a></li>
+        										</ul></li>
+        								</ul></li>
 
-										</ul></li>
-									<li><a class='dropdown-toggle' data-toggle="dropdown"
-										href="#">Content</a>
-										<ul class="submenu dropdown-menu">
-											<li><a tabindex="-1" href="#" id="upperCaseContent"
-												onclick="showViewFont('Content','UpperCase')">UpperCase</a></li>
-											<li><a tabindex="-1" href="#" id="LowerCaseContent"
-												onclick="showViewFont('Content','LowerCase')">LowerCase</a></li>
-											<li><a tabindex="-1" href="#" id="capitaliseFontContent"
-												onclick="showViewFont('Content','Refresh')">Refresh</a></li>
-										</ul></li>
-								</ul></li>
+        							<li class="fontSizeIcon dropdown"><a class="dropdown-toggle"
+        								href="#" data-toggle="dropdown"> <span class='listImage'>
+        										<img src="images/font-size.png" style='width: 20px;'
+        										title="Font Size" class="fontSizeChangeButton themeModeDark" />
+        								</span> <span class='mobileTitle'>Font Size</span>
+        							</a>
+        								<ul class="dropdown-menu">
+        									<li><a class='dropdown-toggle' data-toggle="dropdown"
+        										href="#"> Menu</a>
+        										<ul class="submenu dropdown-menu">
+        											<li><a class="dropdown-item"
+        												onclick="menuFontSizeData('Menu','Smaller')"
+        												event.preventDefault(); href="#">Smaller</a></li>
+        											<li><a class="dropdown-item" href="#"
+        												onclick="menuFontSizeData('Menu','Medium')">Medium</a></li>
+        											<li><a class="dropdown-item" href="#"
+        												onclick="menuFontSizeData('Menu','Large')">Large</a></li>
+        											<li><a class="dropdown-item" href="#"
+        												onclick="menuFontSizeData('Menu','Reset')">Reset</a></li>
+        										</ul></li>
+        									<li><a class='dropdown-toggle' data-toggle="dropdown"
+        										href="#"> Content </a>
+        										<ul class="submenu dropdown-menu">
+        											<li><a class="dropdown-item" href="#"
+        												onclick="contentFontSizeData('Content','Smaller')">Smaller</a></li>
+        											<li><a class="dropdown-item" href="#"
+        												onclick="contentFontSizeData('Content','Medium')">Medium</a></li>
+        											<li><a class="dropdown-item" href="#"
+        												onclick="contentFontSizeData('Content','Large')">Large</a></li>
+        											<li><a class="dropdown-item" href="#"
+        												onclick="contentFontSizeData('Content','Reset')">Reset</a></li>
+        										</ul></li>
+        									<li><a class='dropdown-toggle' data-toggle="dropdown"
+        										href="#"> Description </a>
+        										<ul class="submenu dropdown-menu">
+        											<li><a class="dropdown-item" href="#"
+        												onclick="descriptionFontSize('Description','Smaller')">Smaller</a></li>
+        											<li><a class="dropdown-item" href="#"
+        												onclick="descriptionFontSize('Description','Medium')">Medium</a></li>
+        											<li><a class="dropdown-item" href="#"
+        												onclick="descriptionFontSize('Description','Large')">Large</a></li>
+        											<li><a class="dropdown-item" href="#"
+        												onclick="descriptionFontSize('Description','Reset')">Reset</a></li>
 
-							<li class="fontSizeIcon dropdown"><a class="dropdown-toggle"
-								href="#" data-toggle="dropdown"> <span class='listImage'>
-										<img src="images/font-size.png" style='width: 20px;'
-										title="Font Size" class="fontSizeChangeButton themeModeDark" />
-								</span> <span class='mobileTitle'>Font Size</span>
-							</a>
-								<ul class="dropdown-menu">
-									<li><a class='dropdown-toggle' data-toggle="dropdown"
-										href="#"> Menu</a>
-										<ul class="submenu dropdown-menu">
-											<li><a class="dropdown-item"
-												onclick="menuFontSizeData('Menu','Smaller')"
-												event.preventDefault(); href="#">Smaller</a></li>
-											<li><a class="dropdown-item" href="#"
-												onclick="menuFontSizeData('Menu','Medium')">Medium</a></li>
-											<li><a class="dropdown-item" href="#"
-												onclick="menuFontSizeData('Menu','Large')">Large</a></li>
-											<li><a class="dropdown-item" href="#"
-												onclick="menuFontSizeData('Menu','Reset')">Reset</a></li>
-										</ul></li>
-									<li><a class='dropdown-toggle' data-toggle="dropdown"
-										href="#"> Content </a>
-										<ul class="submenu dropdown-menu">
-											<li><a class="dropdown-item" href="#"
-												onclick="contentFontSizeData('Content','Smaller')">Smaller</a></li>
-											<li><a class="dropdown-item" href="#"
-												onclick="contentFontSizeData('Content','Medium')">Medium</a></li>
-											<li><a class="dropdown-item" href="#"
-												onclick="contentFontSizeData('Content','Large')">Large</a></li>
-											<li><a class="dropdown-item" href="#"
-												onclick="contentFontSizeData('Content','Reset')">Reset</a></li>
-										</ul></li>
-									<li><a class='dropdown-toggle' data-toggle="dropdown"
-										href="#"> Description </a>
-										<ul class="submenu dropdown-menu">
-											<li><a class="dropdown-item" href="#"
-												onclick="descriptionFontSize('Description','Smaller')">Smaller</a></li>
-											<li><a class="dropdown-item" href="#"
-												onclick="descriptionFontSize('Description','Medium')">Medium</a></li>
-											<li><a class="dropdown-item" href="#"
-												onclick="descriptionFontSize('Description','Large')">Large</a></li>
-											<li><a class="dropdown-item" href="#"
-												onclick="descriptionFontSize('Description','Reset')">Reset</a></li>
+        										</ul></li>
+        								</ul></li>
+        							<li class="themeChangeIcon" onclick="changeTheme()"><a
+        								class="" href="#"> <span class='listImage'> <img
+        										src="images/lightmode.png" title="Light Mode"
+        										class="themeModeClickButton" width="20px">
+        								</span> <span class="mobileTitle">Dark Mode</span>
+        							</a></li>
 
-										</ul></li>
-								</ul></li>
-							<li class="themeChangeIcon" onclick="changeTheme()"><a
-								class="" href="#"> <span class='listImage'> <img
-										src="images/lightmode.png" title="Light Mode"
-										class="themeModeClickButton" width="20px">
-								</span> <span class="mobileTitle">Dark Mode</span>
-							</a></li>
+        							<li class='extendedViewIcon'
+        								onclick="javascript:toggleFullScreen()"><a href="#!"
+        								class="waves-effect waves-light"> <span class='listImage'>
+        										<img src="images/extendedview.png" class="themeModeDark"
+        										width="20px" id='IntelliSenseFs' title='View full screen'>
+        								</span> <span class="mobileTitle">View Full Screen</span>
+        							</a></li>
 
-							<li class='extendedViewIcon'
-								onclick="javascript:toggleFullScreen()"><a href="#!"
-								class="waves-effect waves-light"> <span class='listImage'>
-										<img src="images/extendedview.png" class="themeModeDark"
-										width="20px" id='IntelliSenseFs' title='View full screen'>
-								</span> <span class="mobileTitle">View Full Screen</span>
-							</a></li>
+        							<li class="languageChangeIcon" onclick="changeLanguage()"><a
+        								class="" href="#"> <span class='listImage'> <img
+        										src="images/languageSet.png" title="Light Mode"
+        										class="themeModeClickButton themeModeDark" width="20px">
+        								</span> <span class="mobileTitle">Language</span>
+        							</a></li>
 
-							<li class="languageChangeIcon" onclick="changeLanguage()"><a
-								class="" href="#"> <span class='listImage'> <img
-										src="images/languageSet.png" title="Light Mode"
-										class="themeModeClickButton themeModeDark" width="20px">
-								</span> <span class="mobileTitle">Language</span>
-							</a></li>
-
-							<li class="organizationIcon"><a class="" href="#"> <span
-									class='listImage'> <img
-										src="images/Organization_Vision_Icon.svg" title="DXP"
-										class="profile-img themeModeDark" width="20px">
-								</span> <span class="mobileTitle">Organization</span>
-							</a></li>
-							<li class="feedbackIcon"><a href="#"
-								onclick="navigationMenuUrl"> <span class='listImage'>
-										<img src="images/FeedBack_Icon.svg" title="Feedback"
-										class="headerFeedback themeModeDark" width="20px">
-								</span> <span class="mobileTitle">Feedback</span>
-							</a></li>
-
-
-							<li class="ThemesIcon"><a class="" href="#"> <span
-									class='listImage'> <img src="images/Themes.png"
-										title="Themes" class="profile-img themeModeDark" width="20px">
-								</span> <span class="mobileTitle">Themes</span>
-							</a>
-								<div class="innerThemes">
-									<ul>
-										<li onclick="applyTheme('defaultColor')">
-											<div class="lightthemeColor defaultColor"></div> <span
-											class="defaultColorSpan">Default</span>
-										</li>
-										<li onclick="applyTheme('primaryColor')">
-											<div class="darkthemeColor primaryColor"></div> <span
-											class="defaultColorSpan">Primary</span>
-										</li>
-										<li onclick="applyTheme('secondaryColor')">
-											<div class="lightthemeColor secondaryColor"></div> <span
-											class="defaultColorSpan">Secondary</span>
-										</li>
-										<li onclick="applyTheme('basicColor')">
-											<div class="darkthemeColor basicColor"></div> <span
-											class="defaultColorSpan">Basic</span>
-										</li>
-										<li onclick="applyTheme('darkedColor')">
-											<div class="darkthemeColor darkedColor"></div> <span
-											class="defaultColorSpan">Dark</span>
-										</li>
-										<li onclick="applyTheme('lightDarkColor')">
-											<div class="darkthemeColor lightDarkColor"></div> <span
-											class="defaultColorSpan">lightDark</span>
-										</li>
-									</ul>
-									<ul>
-										<li onclick="applyTheme('defaultHomeTheme')"><img
-											src="images/home_theme1.png"
-											class="lightthemeColors defaulttheme"></li>
-										<li onclick="applyTheme('primaryHomeTheme')"><img
-											src="images/home_theme2.jpg"
-											class="lightthemeColors primarytheme"></li>
-										<li onclick="applyTheme('secondaryHomeTheme')"><img
-											src="images/home_theme3.jpg"
-											class="lightthemeColors secondarytheme"></li>
-										<li onclick="applyTheme('basicHomeTheme')"><img
-											src="images/home_theme4.jpg"
-											class="lightthemeColors basictheme"></li>
-									</ul>
-								</div>
-								<div class="moreThemesShowDiv">More Themes</div>
-
-								<div class="moreThemes" style="display: none">
-									<ul>
-										<li onclick="applyTheme('moreHomeThemeOne')"><img
-											src="images/themebg_1.jpg"
-											class="lightthemeColors moreThemeOne"></li>
-										<li onclick="applyTheme('moreHomeThemeTwo')"><img
-											src="images/themebg_2.jpg"
-											class="lightthemeColors moreThemeTwo"></li>
-										<li onclick="applyTheme('moreHomeThemeThree')"><img
-											src="images/themebg_3.jpg"
-											class="lightthemeColors moreThemeThree"></li>
-										<li onclick="applyTheme('moreHomeThemeFour')"><img
-											src="images/themebg_4.jpg"
-											class="lightthemeColors moreThemeFour"></li>
-										<li onclick="applyTheme('moreHomeThemeFive')"><img
-											src="images/themebg_5.jpg"
-											class="lightthemeColors moreThemeFive"></li>
-										<li onclick="applyTheme('moreHomeThemeSix')"><img
-											src="images/themebg_6.jpg"
-											class="lightthemeColors moreThemeSix"></li>
-									</ul>
-									<ul>
-										<li onclick="applyTheme('moreHomeThemeSeveen')"><img
-											src="images/themebg_7.jpg"
-											class="lightthemeColors moreThemeSeveen"></li>
-										<li onclick="applyTheme('moreHomeThemeEight')"><img
-											src="images/themebg_8.jpg"
-											class="lightthemeColors moreThemeEight"></li>
-										<li onclick="applyTheme('moreHomeThemeNine')"><img
-											src="images/themebg_9.png"
-											class="lightthemeColors moreThemeNine"></li>
-										<li onclick="applyTheme('moreHomeThemeTen')"><img
-											src="images/themebg_10.jpg"
-											class="lightthemeColors moreThemeTen"></li>
-										<li onclick="applyTheme('moreHomeThemeEleven')"><img
-											src="images/themebg_11.jpg"
-											class="lightthemeColors moreThemeNine"></li>
-										<li onclick="applyTheme('moreHomeThemeTwelve')"><img
-											src="images/themebg_12.jpg"
-											class="lightthemeColors moreThemeTen"></li>
-									</ul>
-								</div>
-
-								<div class="moreThemesHideDiv" style="display: none;">Hide
-									Themes</div></li>
-
-							<li class="contactPreferencesIcon"><a class="" href="#">
-									<span class='listImage'> <img src="images/SignUp.png"
-										title="Contact Preferences" class="profile-img themeModeDark"
-										width="20px">
-								</span> <span class="mobileTitle">Contact Preferences</span>
-							</a></li>
-							<li class="RegisterIcon"><a class="" href="#" onclick="showRegisterForm()"> <span
-									class='listImage'> <img src="images/SignUp.png"
-										title="Other" class="profile-img themeModeDark" width="20px">
-								</span> <span class="mobileTitle">Register</span>
-							</a></li>
-							<li class="passworIcon"><a class="" href="#"> <span
-									class='listImage'> <img src="images/passwordSet.png"
-										title="Password" class="profile-img themeModeDark"
-										width="20px">
-								</span> <span class="mobileTitle">Password</span>
-							</a></li>
-							<li class="aboutUsIcon"><a class="" href="#"> <span
-									class='listImage'> <img src="images/AboutUsSet.png"
-										title="About Us" class="profile-img themeModeDark"
-										width="20px">
-								</span> <span class="mobileTitle">About Us</span>
-							</a></li>
-							<li class="OtherIcon"><a class="" href="#"> <span
-									class='listImage'> <img src="images/search_blue1.png"
-										title="Other" class="profile-img themeModeDark" width="20px">
-								</span> <span class="mobileTitle">Other</span>
-							</a></li>
-						</ul>
-					</div>
-					<div class='listofSettingDiv' id='helpContentDiv'
-						style='display: none;'>
-						<ul>
-							<li><a class="" href="#"> <span class='listImage'>
-										<img src="images/ChatIcon.png" title="Mycart"
-										class="headerShoppingCart themeModeDark" width="20px">
-								</span> <span class="mobileTitle">Chat</span>
-							</a></li>
-							<li><a class="" href="#"> <span class='listImage'>
-										<img src="images/SearchHelp.png" title="Help Document"
-										class="headerShoppingCart themeModeDark" width="20px">
-								</span> <span class="mobileTitle">Help Document</span>
-							</a></li>
-							<li><a class="" target="_blank" href="https://youtu.be/QeAJRZrFPUc"> <span class='listImage'>
-										<img src="images/SearchVideoPlay.png" title="Help Video"
-										class="headerShoppingCart themeModeDark" width="20px">
-								</span> <span class="mobileTitle">Help Video</span>
-							</a></li>
-							<li><a class="" href="#"> <span class='listImage'>
-										<img src="images/SearchGif.png" title="Help Gif"
-										class="headerShoppingCart themeModeDark" width="20px">
-								</span> <span class="mobileTitle">Help Gif</span>
-							</a></li>
-						</ul>
-					</div>
-
-					<div class='listofSettingDiv' id='calendarContentDiv'
-						style='display: none;'>
-						<div class="scheduledCalendarMainWrapper">
-							<div class="content-wrapper grey lighten-3">
-								<div class="container calendarMainClass">
-									<div class="calendar-wrapper z-depth-2">
-										<div class="calendar-header">
-											<div class="row header-title header-text">
-												<div class="col-md-6">
-													<h3 id="month-name"></h3>
-												</div>
-												<div class="col-md-6">
-													<div class="currentdate">
-														<h5 id="todayDayName">Today</h5>
-														<a class="prev-button" id="prev"> <i
-															class="fa fa-chevron-left" aria-hidden="true"></i>
-														</a> <a class="next-button" id="next"> <i
-															class="fa fa-chevron-right" aria-hidden="true"></i>
-														</a>
-													</div>
-												</div>
-											</div>
-										</div>
+        							<li class="organizationIcon"><a class="" href="#"> <span
+        									class='listImage'> <img
+        										src="images/Organization_Vision_Icon.svg" title="DXP"
+        										class="profile-img themeModeDark" width="20px">
+        								</span> <span class="mobileTitle">Organization</span>
+        							</a></li>
+        							<li class="feedbackIcon"><a href="#"
+        								onclick="navigationMenuUrl"> <span class='listImage'>
+        										<img src="images/FeedBack_Icon.svg" title="Feedback"
+        										class="headerFeedback themeModeDark" width="20px">
+        								</span> <span class="mobileTitle">Feedback</span>
+        							</a></li>
 
 
-										<div class="calendar-content">
-											<div id="calendar-table" class="calendar-cells">
-												<div id="table-header">
-													<div class="row">
-														<div class="col-1 colDays">M</div>
-														<div class="col-1 colDays">T</div>
-														<div class="col-1 colDays">W</div>
-														<div class="col-1 colDays">T</div>
-														<div class="col-1 colDays">F</div>
-														<div class="col-1 colDays">S</div>
-														<div class="col-1 colDays">S</div>
-													</div>
-													<hr />
-												</div>
+        							<li class="ThemesIcon"><a class="" href="#"> <span
+        									class='listImage'> <img src="images/Themes.png"
+        										title="Themes" class="profile-img themeModeDark" width="20px">
+        								</span> <span class="mobileTitle">Themes</span>
+        							</a>
+        								<div class="innerThemes">
+        									<ul>
+        										<li onclick="applyTheme('defaultColor')">
+        											<div class="lightthemeColor defaultColor"></div> <span
+        											class="defaultColorSpan">Default</span>
+        										</li>
+        										<li onclick="applyTheme('primaryColor')">
+        											<div class="darkthemeColor primaryColor"></div> <span
+        											class="defaultColorSpan">Primary</span>
+        										</li>
+        										<li onclick="applyTheme('secondaryColor')">
+        											<div class="lightthemeColor secondaryColor"></div> <span
+        											class="defaultColorSpan">Secondary</span>
+        										</li>
+        										<li onclick="applyTheme('basicColor')">
+        											<div class="darkthemeColor basicColor"></div> <span
+        											class="defaultColorSpan">Basic</span>
+        										</li>
+        										<li onclick="applyTheme('darkedColor')">
+        											<div class="darkthemeColor darkedColor"></div> <span
+        											class="defaultColorSpan">Dark</span>
+        										</li>
+        										<li onclick="applyTheme('lightDarkColor')">
+        											<div class="darkthemeColor lightDarkColor"></div> <span
+        											class="defaultColorSpan">lightDark</span>
+        										</li>
+        									</ul>
+        									<ul>
+        										<li onclick="applyTheme('defaultHomeTheme')"><img
+        											src="images/home_theme1.png"
+        											class="lightthemeColors defaulttheme"></li>
+        										<li onclick="applyTheme('primaryHomeTheme')"><img
+        											src="images/home_theme2.jpg"
+        											class="lightthemeColors primarytheme"></li>
+        										<li onclick="applyTheme('secondaryHomeTheme')"><img
+        											src="images/home_theme3.jpg"
+        											class="lightthemeColors secondarytheme"></li>
+        										<li onclick="applyTheme('basicHomeTheme')"><img
+        											src="images/home_theme4.jpg"
+        											class="lightthemeColors basictheme"></li>
+        									</ul>
+        								</div>
+        								<div class="moreThemesShowDiv">More Themes</div>
 
-												<div id="table-body"></div>
+        								<div class="moreThemes" style="display: none">
+        									<ul>
+        										<li onclick="applyTheme('moreHomeThemeOne')"><img
+        											src="images/themebg_1.jpg"
+        											class="lightthemeColors moreThemeOne"></li>
+        										<li onclick="applyTheme('moreHomeThemeTwo')"><img
+        											src="images/themebg_2.jpg"
+        											class="lightthemeColors moreThemeTwo"></li>
+        										<li onclick="applyTheme('moreHomeThemeThree')"><img
+        											src="images/themebg_3.jpg"
+        											class="lightthemeColors moreThemeThree"></li>
+        										<li onclick="applyTheme('moreHomeThemeFour')"><img
+        											src="images/themebg_4.jpg"
+        											class="lightthemeColors moreThemeFour"></li>
+        										<li onclick="applyTheme('moreHomeThemeFive')"><img
+        											src="images/themebg_5.jpg"
+        											class="lightthemeColors moreThemeFive"></li>
+        										<li onclick="applyTheme('moreHomeThemeSix')"><img
+        											src="images/themebg_6.jpg"
+        											class="lightthemeColors moreThemeSix"></li>
+        									</ul>
+        									<ul>
+        										<li onclick="applyTheme('moreHomeThemeSeveen')"><img
+        											src="images/themebg_7.jpg"
+        											class="lightthemeColors moreThemeSeveen"></li>
+        										<li onclick="applyTheme('moreHomeThemeEight')"><img
+        											src="images/themebg_8.jpg"
+        											class="lightthemeColors moreThemeEight"></li>
+        										<li onclick="applyTheme('moreHomeThemeNine')"><img
+        											src="images/themebg_9.png"
+        											class="lightthemeColors moreThemeNine"></li>
+        										<li onclick="applyTheme('moreHomeThemeTen')"><img
+        											src="images/themebg_10.jpg"
+        											class="lightthemeColors moreThemeTen"></li>
+        										<li onclick="applyTheme('moreHomeThemeEleven')"><img
+        											src="images/themebg_11.jpg"
+        											class="lightthemeColors moreThemeNine"></li>
+        										<li onclick="applyTheme('moreHomeThemeTwelve')"><img
+        											src="images/themebg_12.jpg"
+        											class="lightthemeColors moreThemeTen"></li>
+        									</ul>
+        								</div>
 
-											</div>
-										</div>
-										<div class="sidebar-wrapper z-depth-2 side-nav fixed"
-											id="sidebar">
+        								<div class="moreThemesHideDiv" style="display: none;">Hide
+        									Themes</div></li>
 
-											<div class="sidebar-title">
-												<h5 id="eventDayName">Date</h5>
-												<h5 class="newEventName" onclick="addNewDateWiseEvent()">
-													Add new event <span class="newEventSpan"> <img
-														src="images/calendarevent.png" class="newEventImage"
-														width="20px">
-													</span>
-												</h5>
-											</div>
-											<div class="sidebar-events" id="sidebarEvents">
-												<div class="empty-message">Currently, no events to
-													selected date</div>
-											</div>
-										</div>
+        							<li class="contactPreferencesIcon"><a class="" href="#">
+        									<span class='listImage'> <img src="images/SignUp.png"
+        										title="Contact Preferences" class="profile-img themeModeDark"
+        										width="20px">
+        								</span> <span class="mobileTitle">Contact Preferences</span>
+        							</a></li>
+        							<li class="RegisterIcon"><a class="" href="#" onclick="showRegisterForm()"> <span
+        									class='listImage'> <img src="images/SignUp.png"
+        										title="Other" class="profile-img themeModeDark" width="20px">
+        								</span> <span class="mobileTitle">Register</span>
+        							</a></li>
+        							<li class="passworIcon"><a class="" href="#"> <span
+        									class='listImage'> <img src="images/passwordSet.png"
+        										title="Password" class="profile-img themeModeDark"
+        										width="20px">
+        								</span> <span class="mobileTitle">Password</span>
+        							</a></li>
+        							<li class="aboutUsIcon"><a class="" href="#"> <span
+        									class='listImage'> <img src="images/AboutUsSet.png"
+        										title="About Us" class="profile-img themeModeDark"
+        										width="20px">
+        								</span> <span class="mobileTitle">About Us</span>
+        							</a></li>
+        							<li class="OtherIcon"><a class="" href="#"> <span
+        									class='listImage'> <img src="images/search_blue1.png"
+        										title="Other" class="profile-img themeModeDark" width="20px">
+        								</span> <span class="mobileTitle">Other</span>
+        							</a></li>
+        						</ul>
+        					</div>
+        					<div class='listofSettingDiv' id='helpContentDiv'
+        						style='display: none;'>
+        						<ul>
+        							<li><a class="" href="#"> <span class='listImage'>
+        										<img src="images/ChatIcon.png" title="Mycart"
+        										class="headerShoppingCart themeModeDark" width="20px">
+        								</span> <span class="mobileTitle">Chat</span>
+        							</a></li>
+        							<li><a class="" href="#"> <span class='listImage'>
+        										<img src="images/SearchHelp.png" title="Help Document"
+        										class="headerShoppingCart themeModeDark" width="20px">
+        								</span> <span class="mobileTitle">Help Document</span>
+        							</a></li>
+        							<li><a class="" target="_blank" href="https://youtu.be/QeAJRZrFPUc"> <span class='listImage'>
+        										<img src="images/SearchVideoPlay.png" title="Help Video"
+        										class="headerShoppingCart themeModeDark" width="20px">
+        								</span> <span class="mobileTitle">Help Video</span>
+        							</a></li>
+        							<li><a class="" href="#"> <span class='listImage'>
+        										<img src="images/SearchGif.png" title="Help Gif"
+        										class="headerShoppingCart themeModeDark" width="20px">
+        								</span> <span class="mobileTitle">Help Gif</span>
+        							</a></li>
+        						</ul>
+        					</div>
 
-										<!-- 										<div class="calendar-footer"> -->
-										<!-- 											<div class="emptyForm" id="emptyForm"> -->
-										<!-- 												<h4 id="emptyFormTitle">No events now</h4> -->
-										<!-- <!-- 												<a class="addEvent" id="changeFormButton">Add new</a> -->
-										<!-- 											</div> -->
+        					<div class='listofSettingDiv' id='calendarContentDiv'
+        						style='display: none;'>
+        						<div class="scheduledCalendarMainWrapper">
+        							<div class="content-wrapper grey lighten-3">
+        								<div class="container calendarMainClass">
+        									<div class="calendar-wrapper z-depth-2">
+        										<div class="calendar-header">
+        											<div class="row header-title header-text">
+        												<div class="col-md-6">
+        													<h3 id="month-name"></h3>
+        												</div>
+        												<div class="col-md-6">
+        													<div class="currentdate">
+        														<h5 id="todayDayName">Today</h5>
+        														<a class="prev-button" id="prev"> <i
+        															class="fa fa-chevron-left" aria-hidden="true"></i>
+        														</a> <a class="next-button" id="next"> <i
+        															class="fa fa-chevron-right" aria-hidden="true"></i>
+        														</a>
+        													</div>
+        												</div>
+        											</div>
+        										</div>
 
-										<!-- 										</div> -->
 
-									</div>
+        										<div class="calendar-content">
+        											<div id="calendar-table" class="calendar-cells">
+        												<div id="table-header">
+        													<div class="row">
+        														<div class="col-1 colDays">M</div>
+        														<div class="col-1 colDays">T</div>
+        														<div class="col-1 colDays">W</div>
+        														<div class="col-1 colDays">T</div>
+        														<div class="col-1 colDays">F</div>
+        														<div class="col-1 colDays">S</div>
+        														<div class="col-1 colDays">S</div>
+        													</div>
+        													<hr />
+        												</div>
 
-								</div>
+        												<div id="table-body"></div>
 
-							</div>
-						</div>
-					</div>
-					<div class='listofSettingDiv' id='userContentDiv'
-						style='display: none;'>
-						<ul>
-							<li class="shoppingIcon"><a href="<c:url value="/"/>myCart">
-									<span class='listImage'> <img
-										src="images/shopping-Cart-Icon.svg" title="Mycart"
-										class="headerShoppingCart themeModeDark" width="20px">
-								</span> <span class="mobileTitle">My Cart</span>
-							</a></li>
-							<li><a href="#" onclick="showMySubscriptionsData()"> <span
-									class='listImage'> <img src="images/subscription.png"
-										alt="" style='width: 20px;'>
-								</span> <span class="subscription mobileTitle">My Subscriptions</span>
-							</a></li>
-							<li><a href="#" onclick="showMyTransactionsData()"> <span
-									class='listImage'> <img src="images/transaction.png"
-										alt="" style='width: 20px;'>
-								</span> <span class="transaction mobileTitle">My Transactions</span></a></li>
-							<li><a href="#" onclick="showMyWalletsData()"> <span
-									class='listImage'> <img src="images/wallet.png" alt=""
-										style='width: 20px;'></span> <span class="wallet mobileTitle">My
-										Wallet</span></a></li>
-							<li><a href="#" onclick="showMyWorkSpaceData('FORM')"><span
-									class='listImage'> <img src="images/workspace.png"
-										alt="" style='width: 20px;'></span><span
-									class="workSpace mobileTitle">My Workspace</span></a></li>
-							<li><a href="#" onclick="showMyWorkSpaceData('CHART')"><span
-									class='listImage'> <img
-										src="images/analyticsShowCard.png" alt="" style='width: 20px;'></span><span
-									class="analytics mobileTitle">Workspace Analytics</span></a></li>
-							<li class="logoutIcon openbtn" onclick="openNav()" title="Logout"
-								data-toggle="modal" data-target="#signOut"><a class=""
-								href="#"> <span class='listImage'> <img
-										src="images/LogOut_Icon.svg" class="profile-img themeModeDark"
-										width="20px"></span> <span class="mobileTitle">Log Out</span>
-							</a></li>
-						</ul>
-					</div>
+        											</div>
+        										</div>
+        										<div class="sidebar-wrapper z-depth-2 side-nav fixed"
+        											id="sidebar">
 
-				</div>
+        											<div class="sidebar-title">
+        												<h5 id="eventDayName">Date</h5>
+        												<h5 class="newEventName" onclick="addNewDateWiseEvent()">
+        													Add new event <span class="newEventSpan"> <img
+        														src="images/calendarevent.png" class="newEventImage"
+        														width="20px">
+        													</span>
+        												</h5>
+        											</div>
+        											<div class="sidebar-events" id="sidebarEvents">
+        												<div class="empty-message">Currently, no events to
+        													selected date</div>
+        											</div>
+        										</div>
 
-			</div>
-		</div>
+        										<!-- 										<div class="calendar-footer"> -->
+        										<!-- 											<div class="emptyForm" id="emptyForm"> -->
+        										<!-- 												<h4 id="emptyFormTitle">No events now</h4> -->
+        										<!-- <!-- 												<a class="addEvent" id="changeFormButton">Add new</a> -->
+        										<!-- 											</div> -->
 
+        										<!-- 										</div> -->
+
+        									</div>
+
+        								</div>
+
+        							</div>
+        						</div>
+        					</div>
+        					<div class='listofSettingDiv' id='userContentDiv'
+        						style='display: none;'>
+        						<ul>
+        							<li class="shoppingIcon"><a href="<c:url value="/"/>myCart">
+        									<span class='listImage'> <img
+        										src="images/shopping-Cart-Icon.svg" title="Mycart"
+        										class="headerShoppingCart themeModeDark" width="20px">
+        								</span> <span class="mobileTitle">My Cart</span>
+        							</a></li>
+        							<li><a href="#" onclick="showMySubscriptionsData()"> <span
+        									class='listImage'> <img src="images/subscription.png"
+        										alt="" style='width: 20px;'>
+        								</span> <span class="subscription mobileTitle">My Subscriptions</span>
+        							</a></li>
+        							<li><a href="#" onclick="showMyTransactionsData()"> <span
+        									class='listImage'> <img src="images/transaction.png"
+        										alt="" style='width: 20px;'>
+        								</span> <span class="transaction mobileTitle">My Transactions</span></a></li>
+        							<li><a href="#" onclick="showMyWalletsData()"> <span
+        									class='listImage'> <img src="images/wallet.png" alt=""
+        										style='width: 20px;'></span> <span class="wallet mobileTitle">My
+        										Wallet</span></a></li>
+        							<li><a href="#" onclick="showMyWorkSpaceData('FORM')"><span
+        									class='listImage'> <img src="images/workspace.png"
+        										alt="" style='width: 20px;'></span><span
+        									class="workSpace mobileTitle">My Workspace</span></a></li>
+        							<li><a href="#" onclick="showMyWorkSpaceData('CHART')"><span
+        									class='listImage'> <img
+        										src="images/analyticsShowCard.png" alt="" style='width: 20px;'></span><span
+        									class="analytics mobileTitle">Workspace Analytics</span></a></li>
+        							<li class="logoutIcon openbtn" onclick="openNav()" title="Logout"
+        								data-toggle="modal" data-target="#signOut"><a class=""
+        								href="#"> <span class='listImage'> <img
+        										src="images/LogOut_Icon.svg" class="profile-img themeModeDark"
+        										width="20px"></span> <span class="mobileTitle">Log Out</span>
+        							</a></li>
+        						</ul>
+        					</div>
+
+        				</div>
+
+        			</div>
+        		</div>
+
+        	</div>
 	</div>
 	<!-- DXP New Theme Body Layout -->
 	<c:choose>

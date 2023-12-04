@@ -547,7 +547,7 @@ and open the template in the editor.
 	z-index: 1;
 	/* 	height: 100vh; */
 	top: 50px;
-	right: 6px;
+	right: -5px;
 	overflow-x: hidden;
 	background-color: #fff;
 	transition: 0.5s;
@@ -821,15 +821,16 @@ font-size: 13px;
 /*Setting pannel css starts here by Rajasekhar on 16-12-2022*/
 
 .settingPannel .pannelTitle .spanTitle {
-margin-left: 8px;
+	margin-left: 8px;
     position: relative;
+	flex:1;
 }
 
-.settingPannel .pannelTitle .spanCloseIcon {
+/* .settingPannel .pannelTitle .spanCloseIcon {
 float: right;
     position: absolute;
     right: 0;
-}
+} */
 /*Setting pannel css ends here by Rajasekhar on 16-12-2022*/
 
 .fluidWidth{

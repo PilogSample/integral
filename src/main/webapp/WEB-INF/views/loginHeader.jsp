@@ -11,27 +11,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
-
-<style>
-    .se-pre-con {
-        position: fixed;
-        left: 0px;
-        top: 0px;
-        width: 100%;
-        height: 100%;
-        z-index: 9999;
-        background: url(images/Loader.gif) center no-repeat #f8f9f9;
-        background-size: 90px 82px;
-    }
-    input::-webkit-input-placeholder,
-    textarea::-webkit-input-placeholder {
-        color: #000;
-    }
-
-</style> 
 <div class="se-pre-con"></div>
-
-
 <div  id="modalDailogDiv">
 
 </div>
